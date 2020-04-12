@@ -1,0 +1,41 @@
+### task 1 for creating directory	
+## answer is:
+
+mkdir -p A/B/D/I/M/Z A/B/D/J/L/Z A/B/E/H/L/Z A/C/F/H/L/Z A/C/G/K/L/Z
+
+
+
+
+### task 2 Modify permission to execute date command
+## answer is:
+
+useradd -s /bin/date jack
+sudo chmod -x /bin/date
+setfacl -m u:jack:rwx /bin/date
+setfacl -m u:root:--- /bin/date
+
+
+
+
+### task 3 copy file from another user account
+## answer is 
+
+sudo chmod a+r /home/B/b.txt
+sudo chmod a+r /home/A/a.txt
+cp /home/A/a.txt /home/B/a_copy.txt
+cp /home/B/b.txt /home/A/b_copy.txt
+
+
+
+
+### task 4 Execute cal  command for 10sec and store o/p
+## answer is:
+
+runtime="10 seconds"
+endtime=$(date -ud "$runtime" +%s)
+
+while [[ $(date -u +%s) -le $endtime ]]
+do
+   echo "Time Now: `date +%H:%M:%S`"
+   cal >> /tmp/a.txt
+done
