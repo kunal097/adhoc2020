@@ -1,25 +1,28 @@
 ### TASK1 Create 100 containers of alpine, centos, fedora, java 25 each and run parent process infintly.
 ## TASK1.py  (Code in python3)
-------------------------------------------------------------------------------------------------
+------------------------------------------START------------------------------------------------------
 import os
 images = ['alpine','centos','fedora','java']*25
 images.sort()
-image_name = [f'adhoc{i}' for i in range(1,101)]for image,name in zip(images, image_name):
+image_name = [f'adhocnw{i}' for i in range(1,101)]
+for image,name in zip(images, image_name):
 	os.system(f'docker run --name {name} -dit --restart unless-stopped {image} ping google.com')
--------------------------------------------------------------------------------------------------
+---------------------------------------------END----------------------------------------------------
 
 
 ### TASK2 Store Container name  and created in file
 ## Answer
 
----------------------------------------------------------------
+---------------------------START------------------------------------
 docker ps --format "{{.CreatedAt}} {{.Names}}" > containers.txt
----------------------------------------------------------------
+--------------------------------END-------------------------------
 
-### TASk 3 Run firefox(GUI) within docker
+### TASK 3 Run firefox(GUI) within docker
 ## Answer
 
--------Dockerfile----------------------------------------
+-------------------------START----------------------------------------
+#Dockerfile:
+
 FROM ubuntu
 MAINTAINER Kunal Sharma , kunalsharma19997@gmail.com
 RUN apt-get update && apt-get install -y firefox
@@ -38,4 +41,11 @@ CMD /usr/bin/firefox
 docker build -t kunal:firefox .
 -----------------------Run---------------------------
 docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix kunal:firefox
-------------------------------------------------------------------------------------
+---------------------------------END---------------------------------------------------
+
+
+### TASK 4 Resource metrices of Running containers
+## Answer
+-------------------------------------START---------------------------------------------------
+docker stats --format "table {{.Name}},{{.CPUPerc}},{{.MemUsage}}" --no-stream > Ram.txt
+-----------------------------------------END------------------------------------------------
