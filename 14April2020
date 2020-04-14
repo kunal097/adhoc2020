@@ -1,0 +1,9 @@
+### TASK1 Create 100 containers of alpine, centos, fedora, java 25 each and run parent process infintly.
+## TASK1.py  (Code in python3)
+------------------------------------------------------------------------------------------------
+import os
+images = ['alpine','centos','fedora','java']*25
+images.sort()
+image_name = [f'adhoc{i}' for i in range(1,101)]for image,name in zip(images, image_name):
+	os.system(f'docker run --name {name} -dit --restart unless-stopped {image} ping google.com')
+-------------------------------------------------------------------------------------------------
